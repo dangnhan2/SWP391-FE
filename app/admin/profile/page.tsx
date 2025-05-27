@@ -1,6 +1,7 @@
 "use client";
-import QuanProfile from "@/app/components/profile";
 
-export default function quanProfilePage() {
-  return <QuanProfile/>;
+import Profile from "@/app/components/Profile";
+
+export default function ProfilePage() {
+  return <Profile />;
 }
