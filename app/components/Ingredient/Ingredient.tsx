@@ -3,6 +3,8 @@ import { DeleteTwoTone, EditTwoTone, PlusOutlined } from "@ant-design/icons";
 import { Button, Popconfirm,Table } from "antd";
 import { TableProps } from "antd/lib";
 import { useState } from "react";
+import AddModal from "./AddModal";
+import EditModal from "./EditModal";
 
 interface DataType {
   key: string;
@@ -12,6 +14,8 @@ interface DataType {
   tags: string[];
 }
 const Ingredient = () => {
+  const [open, setOpen] = useState<boolean>(false)
+  const [openEditModal,setOpenEditModal] = useState<boolean>(false)
   const [data, setData] = useState();
    const columns: TableProps<DataType>['columns'] = [
   {
@@ -71,6 +75,7 @@ const Ingredient = () => {
                    <Button
                         icon={<PlusOutlined />}
                         type="primary"
+                        onClick={() => setOpen(true)}
                     >Thêm mới</Button>
                </div>
             </div>
@@ -78,10 +83,15 @@ const Ingredient = () => {
     }
 
    return (
-   <div>
-      <h1 className="font-bold text-3xl mb-5">Ingredient</h1>
-      <Table<DataType> title={renderHeader} columns={columns} dataSource={data} />
-   </div>
+    <>
+       <div>
+       <h1 className="font-bold text-3xl mb-5">Nguyên liệu</h1>
+       <Table<DataType> title={renderHeader} columns={columns} dataSource={data} />
+    </div>
+ 
+    <AddModal open={open} setOpen={setOpen}></AddModal>
+    <EditModal openEditModal={openEditModal} setOpenEditModal={setOpenEditModal}></EditModal>
+    </>
    )
   
 }
