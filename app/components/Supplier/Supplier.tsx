@@ -1,8 +1,9 @@
 "use client"
 import { DeleteTwoTone, EditTwoTone, PlusOutlined } from "@ant-design/icons";
-import { Button, Popconfirm,Table } from "antd";
-import { TableProps } from "antd/lib";
+import { Button, Popconfirm, Table, TableProps } from "antd";
 import { useState } from "react";
+// import Add from "./Add";
+// import AddIngrident from "./Add";
 
 interface DataType {
   key: string;
@@ -11,8 +12,9 @@ interface DataType {
   address: string;
   tags: string[];
 }
-const Ingredient = () => {
+const Supplier = () => {
   const [data, setData] = useState();
+  const [open, setOpen] = useState<boolean>();
    const columns: TableProps<DataType>['columns'] = [
   {
     title: 'Id',
@@ -78,13 +80,17 @@ const Ingredient = () => {
     }
 
    return (
-   <div>
+   <>
+     <div>
       <h1 className="font-bold text-3xl mb-5">Ingredient</h1>
       <Table<DataType> title={renderHeader} columns={columns} dataSource={data} />
    </div>
+    
+    {/* <AddIngrident open={open} setOpen={setOpen}></AddIngrident> */}
+   </>
+   
    )
   
 }
 
-export default Ingredient;
-
+export default Supplier;
