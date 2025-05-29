@@ -84,7 +84,7 @@ const MenuTable = () => {
    return (
    <>
      <div>
-      <h1 className="font-bold text-3xl mb-5">Ingredient</h1>
+      <h1 className="font-bold text-3xl mb-5">Menu</h1>
       <Table<DataType> title={renderHeader} columns={columns} dataSource={data} />
    </div>
     

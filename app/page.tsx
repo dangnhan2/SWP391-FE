@@ -1,3 +1,4 @@
+import Bill from "./components/Bill/Bill";
 import Ingredient from "./components/Ingredient/Ingredient";
 import LayoutAdmin from "./components/Layout/LayoutAdmin";
 import MenuTable from "./components/Menu/Menu";
@@ -9,6 +10,7 @@ export default function AdminHomePage() {
       <Ingredient />
       <Supplier></Supplier>
       <MenuTable></MenuTable>
+      <Bill></Bill>
     </LayoutAdmin>
   );
 }

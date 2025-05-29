@@ -38,6 +38,11 @@ const LayoutAdmin = ({ children }: LayoutProps) => {
       icon: <DollarOutlined />,
       label: <Link href="/admin/menu">Menu</Link>,
     },
+    {
+      key: "6",
+      icon: <DollarOutlined />,
+      label: <Link href="/admin/bill">Bill</Link>,
+    },
   ];
   
   const itemsDropdown = [
