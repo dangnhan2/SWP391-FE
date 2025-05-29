@@ -32,7 +32,7 @@ const EditModal = (props : PropsValue) => {
        <Modal
          width={600}
          title="Thêm menu mới"
-         open={open}
+         open={openEditModal}
          onOk={form.submit}
          onCancel={handleCancel}
          okText="Tạo mới"
