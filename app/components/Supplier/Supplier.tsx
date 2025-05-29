@@ -2,6 +2,8 @@
 import { DeleteTwoTone, EditTwoTone, PlusOutlined } from "@ant-design/icons";
 import { Button, Popconfirm, Table, TableProps } from "antd";
 import { useState } from "react";
+import AddModal from "./AddModal";
+import EditModal from "./EditModal";
 // import Add from "./Add";
 // import AddIngrident from "./Add";
 
@@ -14,7 +16,8 @@ interface DataType {
 }
 const Supplier = () => {
   const [data, setData] = useState();
-  const [open, setOpen] = useState<boolean>();
+  const [open, setOpen] = useState<boolean>(false);
+  const [openEditModal, setOpenEditModal] = useState<boolean>(false);
    const columns: TableProps<DataType>['columns'] = [
   {
     title: 'Id',
@@ -86,7 +89,8 @@ const Supplier = () => {
       <Table<DataType> title={renderHeader} columns={columns} dataSource={data} />
    </div>
     
-    {/* <AddIngrident open={open} setOpen={setOpen}></AddIngrident> */}
+    <AddModal open={open} setOpen={setOpen}></AddModal>
+    <EditModal openEditModal={openEditModal} setOpenEditModal={setOpenEditModal}></EditModal>
    </>
    
    )

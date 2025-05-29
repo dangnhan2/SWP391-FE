@@ -1,8 +1,10 @@
 "use client"
 import { DeleteTwoTone, EditTwoTone, PlusOutlined } from "@ant-design/icons";
-import { Button, Popconfirm,Table } from "antd";
-import { TableProps } from "antd/lib";
+import { Button, Menu, Popconfirm, Table, TableProps } from "antd";
 import { useState } from "react";
+import AddModal from "./Addmodal";
+import EditModal from "./EditModal";
+
 
 interface DataType {
   key: string;
@@ -11,8 +13,10 @@ interface DataType {
   address: string;
   tags: string[];
 }
-const Ingredient = () => {
+const MenuTable = () => {
   const [data, setData] = useState();
+  const [open, setOpen] = useState<boolean>(false);
+  const [openEditModal, setOpenEditModal] = useState<boolean>(false);
    const columns: TableProps<DataType>['columns'] = [
   {
     title: 'Id',
@@ -20,19 +24,19 @@ const Ingredient = () => {
     key: 'id',
   },
   {
-    title: 'Name',
+    title: 'Menu Name',
     dataIndex: 'name',
     key: 'name',
   },
   {
-    title: 'Unit Type',
-    dataIndex: 'type',
-    key: 'type',
+    title: 'Status',
+    dataIndex: 'status',
+    key: 'status',
   },
    {
-    title: 'Price',
-    dataIndex: 'price',
-    key: 'price',
+    title: 'Description',
+    dataIndex: 'description',
+    key: 'description',
   },
   {
     title: 'Action',
@@ -78,13 +82,18 @@ const Ingredient = () => {
     }
 
    return (
-   <div>
+   <>
+     <div>
       <h1 className="font-bold text-3xl mb-5">Ingredient</h1>
       <Table<DataType> title={renderHeader} columns={columns} dataSource={data} />
    </div>
+    
+     <AddModal open={open} setOpen={setOpen}></AddModal>
+    <EditModal openEditModal={openEditModal} setOpenEditModal={setOpenEditModal}></EditModal> 
+   </>
+   
    )
   
 }
 
-export default Ingredient;
-
+export default MenuTable;
