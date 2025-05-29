@@ -21,7 +21,7 @@ const LayoutAdmin = ({ children }: LayoutProps) => {
     {
       key: "2",
       icon: <UserOutlined />,
-      label: <Link href="/admin/user">Manage Users</Link>,
+      label: <Link href="/admin/customer">Customer</Link>,
     },
     {
       key: "3",
