@@ -23,19 +23,19 @@ const Customer = () => {
     key: 'id',
   },
   {
-    title: 'Name',
-    dataIndex: 'name',
+    title: 'FullName',
+    dataIndex: 'fullname',
     key: 'name',
   },
   {
-    title: 'Unit Type',
-    dataIndex: 'type',
-    key: 'type',
+    title: 'PhoneNo',
+    dataIndex: 'phoneno',
+    key: 'phone',
   },
    {
-    title: 'Price',
-    dataIndex: 'price',
-    key: 'price',
+    title: 'Address',
+    dataIndex: 'address',
+    key: 'address',
   },
   {
     title: 'Action',

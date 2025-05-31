@@ -1,11 +1,10 @@
 "use client"
 import { DeleteTwoTone, EditTwoTone, PlusOutlined } from "@ant-design/icons";
-import { Button, Popconfirm, Table, TableProps } from "antd";
+import { Button, Menu, Popconfirm, Table, TableProps } from "antd";
 import { useState } from "react";
-import AddModal from "./AddModal";
+import AddModal from "./Addmodal";
 import EditModal from "./EditModal";
-// import Add from "./Add";
-// import AddIngrident from "./Add";
+
 
 interface DataType {
   key: string;
@@ -14,7 +13,7 @@ interface DataType {
   address: string;
   tags: string[];
 }
-const Supplier = () => {
+const MenuTable = () => {
   const [data, setData] = useState();
   const [open, setOpen] = useState<boolean>(false);
   const [openEditModal, setOpenEditModal] = useState<boolean>(false);
@@ -25,19 +24,19 @@ const Supplier = () => {
     key: 'id',
   },
   {
-    title: 'Name',
+    title: 'Menu Name',
     dataIndex: 'name',
     key: 'name',
   },
   {
-    title: 'Unit Type',
-    dataIndex: 'type',
-    key: 'type',
+    title: 'Status',
+    dataIndex: 'status',
+    key: 'status',
   },
    {
-    title: 'Price',
-    dataIndex: 'price',
-    key: 'price',
+    title: 'Description',
+    dataIndex: 'description',
+    key: 'description',
   },
   {
     title: 'Action',
@@ -85,16 +84,16 @@ const Supplier = () => {
    return (
    <>
      <div>
-      <h1 className="font-bold text-3xl mb-5">Nhà cung cấp</h1>
+      <h1 className="font-bold text-3xl mb-5">Menu</h1>
       <Table<DataType> title={renderHeader} columns={columns} dataSource={data} />
    </div>
     
-    <AddModal open={open} setOpen={setOpen}></AddModal>
-    <EditModal openEditModal={openEditModal} setOpenEditModal={setOpenEditModal}></EditModal>
+     <AddModal open={open} setOpen={setOpen}></AddModal>
+    <EditModal openEditModal={openEditModal} setOpenEditModal={setOpenEditModal}></EditModal> 
    </>
    
    )
   
 }
 
-export default Supplier;
+export default MenuTable;

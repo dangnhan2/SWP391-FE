@@ -21,17 +21,27 @@ const LayoutAdmin = ({ children }: LayoutProps) => {
     {
       key: "2",
       icon: <UserOutlined />,
-      label: <Link href="/admin/user">Manage Users</Link>,
+      label: <Link href="/admin/customer">Customer</Link>,
     },
     {
       key: "3",
       icon: <AuditOutlined />,
-      label: <Link href="/admin/profile">Profile</Link>,
+      label: <Link href="/admin/supplier">Nhà Cung Cấp </Link>,
     },
     {
       key: "4",
       icon: <DollarOutlined />,
       label: <Link href="/admin/ingredient">Ingredient</Link>,
+    },
+    {
+      key: "5",
+      icon: <DollarOutlined />,
+      label: <Link href="/admin/menu">Menu</Link>,
+    },
+    {
+      key: "6",
+      icon: <DollarOutlined />,
+      label: <Link href="/admin/bill">Bill</Link>,
     },
   ];
   
