@@ -21,7 +21,7 @@ const LayoutAdmin = ({ children }: LayoutProps) => {
     {
       key: "2",
       icon: <UserOutlined />,
-      label: <Link href="/admin/customer">Customer</Link>,
+      label: <Link href="/admin/customer">Khách Hàng</Link>,
     },
     {
       key: "3",
@@ -31,17 +31,17 @@ const LayoutAdmin = ({ children }: LayoutProps) => {
     {
       key: "4",
       icon: <DollarOutlined />,
-      label: <Link href="/admin/ingredient">Ingredient</Link>,
+      label: <Link href="/admin/ingredient">Nguyên Liệu</Link>,
     },
     {
       key: "5",
       icon: <DollarOutlined />,
-      label: <Link href="/admin/menu">Menu</Link>,
+      label: <Link href="/admin/menu">Thực Đơn</Link>,
     },
     {
       key: "6",
       icon: <DollarOutlined />,
-      label: <Link href="/admin/bill">Bill</Link>,
+      label: <Link href="/admin/bill">Hóa Đơn</Link>,
     },
   ];
   
@@ -73,9 +73,10 @@ const LayoutAdmin = ({ children }: LayoutProps) => {
   } = theme.useToken();
 
   return (
-   <>
-      <Layout style={{ minHeight: "100vh" }}>
-        <Sider trigger={null} collapsible collapsed={collapsed}>
+   <> 
+   {/* style={{ minHeight: "100vh" }} */}
+      <Layout  style={{ minHeight: "100vh" }} >
+        <Sider trigger={null} collapsible collapsed={collapsed} className="h-screen bg-white"  style={{ display: "flex", flexDirection: "column", justifyContent: "space-between" }}>
           <div className="demo-logo-vertical" />
           <div
             style={{
@@ -88,6 +89,7 @@ const LayoutAdmin = ({ children }: LayoutProps) => {
           >
             Admin
           </div>
+           
 
           <Menu
             // defaultSelectedKeys={[activeMenu]}
@@ -136,7 +138,7 @@ const LayoutAdmin = ({ children }: LayoutProps) => {
               margin: "24px 16px",
               padding: 24,
               minHeight: 280,
-              background: colorBgContainer,
+              background: "#F5F5F5",
               borderRadius: borderRadiusLG,
             }}
           >
