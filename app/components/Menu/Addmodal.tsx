@@ -1,5 +1,6 @@
 "use client"
-import { Col, Divider, Form, Input, InputNumber, Modal, Row } from "antd"
+import { Col, Divider, Form, Input, InputNumber, Modal, Row, Select } from "antd"
+import MenuList from "./MenuList";
 const { TextArea } = Input;
 
 interface PropsValue {
@@ -9,7 +10,7 @@ interface PropsValue {
 
 type FieldType = {
   name?: string;
-  quantity?: string;
+  status?: string;
   price?: number;
   unit?: string;
   description? : string;
@@ -29,8 +30,8 @@ const AddModal = (props : PropsValue) => {
    return (
    <div>
     <Modal
-      width={600}
-      title="Thêm menu mới"
+      width={800}
+      title="Thêm thực đơn mới"
       open={open}
       onOk={form.submit}
       onCancel={handleCancel}
@@ -43,7 +44,6 @@ const AddModal = (props : PropsValue) => {
           name="basic"
           labelCol={{ span: 24 }}
           wrapperCol={{ span: 24 }}
-          style={{ maxWidth: 600 }}
           autoComplete="off"
           form={form}
         //   onFinish={handleSubmit}
@@ -59,7 +59,7 @@ const AddModal = (props : PropsValue) => {
                 <Form.Item<FieldType>
                   label="Menu"
                   name="name"
-                  rules={[{ required: true, message: "Nhập tên!" }]}
+                  rules={[{ required: true, message: "Nhập tên" }]}
               >
                   <Input />
                  </Form.Item>
@@ -67,11 +67,11 @@ const AddModal = (props : PropsValue) => {
              <Col span={12}>
                   <Form.Item<FieldType>
                    
-                   label="Trang thai"
-                   name="quantity"
-                    rules={[{ required: true, message: "Nhập số lượng!" }]}
+                   label="Trang thái"
+                   name="status"
+                   rules={[{ required: true, message: "Chọn trạng thái" }]}
                   >
-                    <InputNumber min={1} style={{ width: '100%' }}/>
+                    <Select options={[{ value: 'active', label: <span>Active</span> } , { value: 'inactive', label: <span>Inactive</span> }]} />
                    </Form.Item>
              </Col>  
           </Row>
@@ -80,8 +80,8 @@ const AddModal = (props : PropsValue) => {
             <Col span={24}>
                <Form.Item<FieldType>
             label="Ghi chú"
-            name="price"
-            rules={[{ required: true, message: "Nhập giá!" }]}
+            name="description"
+            rules={[{ required: false }]}
           >
             <TextArea  onChange={onChange} rows={4}/>
           </Form.Item>
@@ -91,7 +91,9 @@ const AddModal = (props : PropsValue) => {
           
         </Form>
       </div>
+      <MenuList></MenuList>
     </Modal>
+
    </div>
    )
 }

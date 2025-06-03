@@ -1,8 +1,12 @@
 "use client";
-import { AppstoreOutlined, AuditOutlined, DollarOutlined, MenuFoldOutlined, MenuUnfoldOutlined, UserOutlined } from "@ant-design/icons";
+import { MenuFoldOutlined, MenuUnfoldOutlined } from "@ant-design/icons";
 import { Avatar, Button, Dropdown, Layout, Menu, Space, theme } from "antd";
 import Link from "next/link";
 import { ReactNode, useState } from "react";
+import { FaLeaf, FaMoneyBill } from "react-icons/fa";
+import { IoPeople } from "react-icons/io5";
+import { MdDashboard, MdMenuBook } from "react-icons/md";
+import { TbAdjustmentsUp } from "react-icons/tb";
 const { Header, Sider, Content } = Layout;
 
 type LayoutProps = {
@@ -15,32 +19,32 @@ const LayoutAdmin = ({ children }: LayoutProps) => {
     const items = [
     {
       key: "1",
-      icon: <AppstoreOutlined />,
+      icon: <MdDashboard />,
       label: <Link href="/admin">Dash board</Link>,
     },
     {
       key: "2",
-      icon: <UserOutlined />,
+      icon: <IoPeople />,
       label: <Link href="/admin/customer">Khách Hàng</Link>,
     },
     {
       key: "3",
-      icon: <AuditOutlined />,
+      icon: <TbAdjustmentsUp />,
       label: <Link href="/admin/supplier">Nhà Cung Cấp </Link>,
     },
     {
       key: "4",
-      icon: <DollarOutlined />,
+      icon: <FaLeaf />,
       label: <Link href="/admin/ingredient">Nguyên Liệu</Link>,
     },
     {
       key: "5",
-      icon: <DollarOutlined />,
+      icon: <MdMenuBook />,
       label: <Link href="/admin/menu">Thực Đơn</Link>,
     },
     {
       key: "6",
-      icon: <DollarOutlined />,
+      icon:<FaMoneyBill />,
       label: <Link href="/admin/bill">Hóa Đơn</Link>,
     },
   ];
