@@ -3,15 +3,13 @@ import { DeleteTwoTone, EditTwoTone, PlusOutlined } from "@ant-design/icons";
 import { Button, Popconfirm, Table } from "antd";
 import { TableProps } from "antd/lib";
 import { useState } from "react";
-// import Add from "./Add";
-// import AddIngrident from "./Add";
 
 interface DataType {
   key: string;
-  name: string;
-  age: number;
+  id: string;
+  fullName: string;
+  phone: string;
   address: string;
-  tags: string[];
 }
 const Customer = () => {
   const [data, setData] = useState();
@@ -23,19 +21,19 @@ const Customer = () => {
     key: 'id',
   },
   {
-    title: 'Name',
-    dataIndex: 'name',
+    title: 'Full Name',
+    dataIndex: 'fullname',
     key: 'name',
   },
   {
-    title: 'Unit Type',
-    dataIndex: 'type',
-    key: 'type',
+    title: 'Phone No',
+    dataIndex: 'phone no',
+    key: 'phone',
   },
    {
-    title: 'Price',
-    dataIndex: 'price',
-    key: 'price',
+    title: 'Address',
+    dataIndex: 'address',
+    key: 'address',
   },
   {
     title: 'Action',
@@ -45,13 +43,13 @@ const Customer = () => {
 
                         <Popconfirm
                             placement="leftTop"
-                            title={"Xác nhận xóa book"}
-                            description={"Bạn có chắc chắn muốn xóa book này ?"}
-                           //  onConfirm={() => handleDeleteBook(record._id)}
+                            title={"Xác nhận xóa "}
+                            description={"Bạn có chắc chắn muốn xóa khách hàng này ?"}
+                            onConfirm={() => handleDelete(record._id)}
                             okText="Xác nhận"
                             cancelText="Hủy"
                         >
-                            <span style={{ cursor: "pointer", margin: "0 20px" }}>
+                            <span style={{ cursor: "pointer", margin:"0 20px"}}>
                                 <DeleteTwoTone twoToneColor="#ff4d4f" />
                             </span>
                         </Popconfirm>
@@ -86,8 +84,6 @@ const Customer = () => {
       <h1 className="font-bold text-3xl mb-5">Ingredient</h1>
       <Table<DataType> title={renderHeader} columns={columns} dataSource={data} />
    </div>
-        
-{/* <AddIngrident open={open} setOpen={setOpen}></AddIngrident> */}
    </>
    
    )
