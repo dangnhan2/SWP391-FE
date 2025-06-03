@@ -1,40 +1,32 @@
-"use client"
-import { Col, Divider, Form, Input, InputNumber, Modal, Row } from "antd";
-import MenuList from "./MenuList";
-
-const { TextArea } = Input;
-interface PropsValue {
-    openEditModal : boolean
-    setOpenEditModal : (value : boolean) => void
-}
+import { Col, Divider, Form, Input, InputNumber, Modal, Row } from "antd"
 
 type FieldType = {
   name?: string;
-  quantity?: string;
-  price?: number;
-  unit?: string;
-  description? : string;
+  discount?: number;
 };
 
-const EditModal = (props : PropsValue) => {
-   const {openEditModal, setOpenEditModal} = props
-   const [form] = Form.useForm();
+interface PropsValue {
+    open : boolean
+    setOpen : (value : boolean) => void
+}
 
-   const handleCancel = () => {
-    setOpenEditModal(false);
-  };
+const AddDish = (props : PropsValue) => {
+    const [form] = Form.useForm();
+    const {open, setOpen} = props
+
+    const handleCancel = () => {
+    setOpen(false);
+    };
 
   const onChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
   console.log('Change:', e.target.value);
-};
-
-   return (
-    <>
-   <div>
+  }
+    return (
+         <div>
        <Modal
-         width={800}
-         title="Thêm menu mới"
-         open={openEditModal}
+         width={600}
+         title="Thêm món ăn"
+         open={open}
          onOk={form.submit}
          onCancel={handleCancel}
          okText="Tạo mới"
@@ -46,6 +38,7 @@ const EditModal = (props : PropsValue) => {
              name="basic"
              labelCol={{ span: 24 }}
              wrapperCol={{ span: 24 }}
+             style={{ maxWidth: 600 }}
              autoComplete="off"
              form={form}
              //   onFinish={handleSubmit}
@@ -59,7 +52,7 @@ const EditModal = (props : PropsValue) => {
              <Row gutter={[20,20]}>
                 <Col span={12}>
                    <Form.Item<FieldType>
-                     label="Menu"
+                     label="Món ăn"
                      name="name"
                      rules={[{ required: true, message: "Nhập tên" }]}
                  >
@@ -69,39 +62,21 @@ const EditModal = (props : PropsValue) => {
                 <Col span={12}>
                      <Form.Item<FieldType>
                       
-                      label="Trang thai"
-                      name="quantity"
-                      rules={[{ required: true, message: "Chọn trạng thái" }]}
+                      label="Giảm giá"
+                      name="discount"
+                      rules={[{ required: true, message: "Nhập giảm giá" }]}
                      >
                        <InputNumber min={1} style={{ width: '100%' }}/>
                       </Form.Item>
                 </Col>  
              </Row>
-             
-             <Row gutter={[20,20]}>
-               <Col span={24}>
-                  <Form.Item<FieldType>
-               label="Ghi chú"
-               name="price"
-               rules={[{ required: true, message: "Nhập giá!" }]}
-             >
-               <TextArea  onChange={onChange} rows={4}/>
-             </Form.Item>
-               </Col>
-   
-             </Row>
+
              
            </Form>
          </div>
-
-          
-        <MenuList></MenuList>
        </Modal>
       </div>
-    
-    </>
-      )
+    )
 }
-export default EditModal;
 
-        
+export default AddDish;

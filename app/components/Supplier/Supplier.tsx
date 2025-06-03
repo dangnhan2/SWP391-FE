@@ -4,8 +4,6 @@ import { Button, Popconfirm, Table, TableProps } from "antd";
 import { useState } from "react";
 import AddModal from "./AddModal";
 import EditModal from "./EditModal";
-// import Add from "./Add";
-// import AddIngrident from "./Add";
 
 interface DataType {
   key: string;
@@ -59,6 +57,7 @@ const Supplier = () => {
                         </Popconfirm>
 
                         <EditTwoTone
+                            onClick={() => setOpenEditModal(true)}
                             twoToneColor="#f57800" style={{ cursor: "pointer" }}
                   
                         />
@@ -74,6 +73,7 @@ const Supplier = () => {
             <div className="flex justify-end">
                <div>
                    <Button
+                        onClick={() => setOpen(true)}
                         icon={<PlusOutlined />}
                         type="primary"
                     >Thêm mới</Button>

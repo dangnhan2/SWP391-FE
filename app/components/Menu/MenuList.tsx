@@ -1,10 +1,8 @@
 "use client"
-import { DeleteTwoTone, EditTwoTone, PlusOutlined } from "@ant-design/icons";
-import { Button, Menu, Popconfirm, Table, TableProps } from "antd";
+import { DeleteTwoTone, PlusOutlined } from "@ant-design/icons";
+import { Button, Popconfirm, Table, TableProps } from "antd";
 import { useState } from "react";
-import AddModal from "./Addmodal";
-import EditModal from "./EditModal";
-
+import AddDish from "./AddDish";
 
 interface DataType {
   key: string;
@@ -13,10 +11,10 @@ interface DataType {
   address: string;
   tags: string[];
 }
-const MenuTable = () => {
+
+const MenuList = () => {
   const [data, setData] = useState();
-  const [open, setOpen] = useState<boolean>(false);
-  const [openEditModal, setOpenEditModal] = useState<boolean>(false);
+  const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
    const columns: TableProps<DataType>['columns'] = [
   {
     title: 'Id',
@@ -24,19 +22,19 @@ const MenuTable = () => {
     key: 'id',
   },
   {
-    title: 'Menu Name',
+    title: 'Hình ảnh',
+    dataIndex: 'imageUrl',
+    key: 'imageUrl',
+  },
+  {
+    title: 'Món ăn',
     dataIndex: 'name',
     key: 'name',
   },
-  {
-    title: 'Status',
-    dataIndex: 'status',
-    key: 'status',
-  },
    {
-    title: 'Description',
-    dataIndex: 'description',
-    key: 'description',
+    title: 'Giảm  giá',
+    dataIndex: 'discount',
+    key: 'discount',
   },
   {
     title: 'Action',
@@ -57,11 +55,7 @@ const MenuTable = () => {
                             </span>
                         </Popconfirm>
 
-                        <EditTwoTone
-                            onClick={() => setOpenEditModal(true)}
-                            twoToneColor="#f57800" style={{ cursor: "pointer" }}
-                  
-                        />
+
                     </>
 
                 )
@@ -71,10 +65,11 @@ const MenuTable = () => {
 
    const renderHeader = () => {
         return (
-            <div className="flex justify-end">
+            <div className="flex justify-between">
+               <h1 className="font-bold text-3xl mb-5">Danh sách món ăn</h1>
                <div>
                    <Button
-                        onClick={() => setOpen(true)}
+                        onClick={() => setIsModalOpen(true)}
                         icon={<PlusOutlined />}
                         type="primary"
                     >Thêm mới</Button>
@@ -86,16 +81,12 @@ const MenuTable = () => {
    return (
    <>
      <div>
-      <h1 className="font-bold text-3xl mb-5">Thực đơn</h1>
       <Table<DataType> title={renderHeader} columns={columns} dataSource={data} />
    </div>
-    
-     <AddModal open={open} setOpen={setOpen}></AddModal>
-     <EditModal openEditModal={openEditModal} setOpenEditModal={setOpenEditModal}></EditModal> 
+   <AddDish open={isModalOpen} setOpen={setIsModalOpen}></AddDish>
    </>
    
    )
-  
 }
 
-export default MenuTable;
+export default MenuList;
