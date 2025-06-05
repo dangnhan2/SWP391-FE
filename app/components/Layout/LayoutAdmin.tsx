@@ -7,6 +7,7 @@ import { FaLeaf, FaMoneyBill } from "react-icons/fa";
 import { IoPeople } from "react-icons/io5";
 import { MdDashboard, MdMenuBook } from "react-icons/md";
 import { TbAdjustmentsUp } from "react-icons/tb";
+
 const { Header, Sider, Content } = Layout;
 
 type LayoutProps = {
