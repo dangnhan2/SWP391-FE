@@ -1,36 +1,67 @@
 "use client"
-import { Col, Divider, Form, Input, InputNumber, Modal, Row } from "antd"
+import { AddSupplier } from "@/app/service/api";
+import { Col, Divider, Form, Input, message, Modal, Row,notification } from "antd"
+import { FormProps } from "antd/lib";
 const { TextArea } = Input;
 
 interface PropsValue {
     open : boolean
     setOpen : (value : boolean) => void
+    fetchSupplier : () => void
 }
 
 type FieldType = {
-  name?: string;
-  quantity?: string;
-  price?: number;
-  unit?: string;
-  description? : string;
+  name: string;
+  phone: string;
+  email: string;
+  address: string;
+  representative? : string | undefined;
 };
+
+
 const AddModal = (props : PropsValue) => {
-   const {open, setOpen} = props
+   const {open, setOpen, fetchSupplier} = props
    const [form] = Form.useForm();
+  const [messageApi, messageContext] = message.useMessage();
+  const [notificationApi, notificationContext] = notification.useNotification();
+
+   const openNotification = (type: 'success' | 'error', message: string, description: string, placement: NotificationArgsProps['placement'] = 'topRight') => {
+    notificationApi[type]({
+      message,
+      description,
+      placement,
+    });
+  };
 
    const handleCancel = () => {
     setOpen(false);
   };
 
-  const onChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-  console.log('Change:', e.target.value);
-};
+   const handleSubmit: FormProps<FieldType>['onFinish'] = async (values) => {
+     const {name,phone,email,address,representative} = values
+     
+     let res = await AddSupplier(name,phone,email,address,representative!);
+     
+     console.log(res);
+     
+     if(res && res.statusCode === 201){
+       messageApi.success(res.msg);
+        setOpen(false);
+        form.resetFields();
+        fetchSupplier();
+     }else{
+        openNotification('error', 'Lỗi dữ liệu', res.msg);
+     }
+
+  };
 
    return (
    <div>
+    {messageContext}
+    {notificationContext}
     <Modal
       width={600}
-      title="Thêm nguyên liệu mới"
+      title="Thêm nhà cung cấp"
       open={open}
       onOk={form.submit}
       onCancel={handleCancel}
@@ -46,7 +77,7 @@ const AddModal = (props : PropsValue) => {
           style={{ maxWidth: 600 }}
           autoComplete="off"
           form={form}
-        //   onFinish={handleSubmit}
+          onFinish={handleSubmit}
           fields={[
             {
               name : ["quantity"],
@@ -57,7 +88,7 @@ const AddModal = (props : PropsValue) => {
           <Row gutter={[20,20]}>
              <Col span={12}>
                 <Form.Item<FieldType>
-                  label="Tên nguyên liệu"
+                  label="Tên nhà cung cấp"
                   name="name"
                   rules={[{ required: true, message: "Nhập tên!" }]}
               >
@@ -67,11 +98,11 @@ const AddModal = (props : PropsValue) => {
              <Col span={12}>
                   <Form.Item<FieldType>
                    
-                   label="Số lượng"
-                   name="quantity"
-                    rules={[{ required: true, message: "Nhập số lượng!" }]}
+                   label="Số điện thoại"
+                   name="phone"
+                    rules={[{ required: true, message: "Nhập điện thoại!" }]}
                   >
-                    <InputNumber min={1} style={{ width: '100%' }}/>
+                    <Input/>
                    </Form.Item>
              </Col>  
           </Row>
@@ -79,18 +110,18 @@ const AddModal = (props : PropsValue) => {
           <Row gutter={[20,20]}>
             <Col span={12}>
                <Form.Item<FieldType>
-            label="Giá"
-            name="price"
-            rules={[{ required: true, message: "Nhập giá!" }]}
+            label="Email"
+            name="email"
+            rules={[{ required: true, message: "Nhập email!" }]}
           >
             <Input />
           </Form.Item>
             </Col>
             <Col span={12}>
             <Form.Item<FieldType>
-            label="Đơn vị"
-            name="unit"
-            rules={[{ required: true, message: "Nhập đơn vị!" }]}
+            label="Địa chỉ"
+            name="address"
+            rules={[{ required: true, message: "Nhập địa chỉ!" }]}
            >
             <Input />
           </Form.Item>
@@ -99,10 +130,10 @@ const AddModal = (props : PropsValue) => {
           </Row>
           <Row>
 
-              <Col span={24}>
-              <Form.Item<FieldType> label="Ghi Chú">
+              <Col span={12}>
+              <Form.Item<FieldType> label="Người đại diện" name="representative">
               
-              <TextArea  onChange={onChange} rows={4}/>
+               <Input />
               </Form.Item>
               </Col>
           </Row>

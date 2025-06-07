@@ -1,10 +1,18 @@
 "use client"
-import { Col, Divider, Form, Input, InputNumber, Modal, Row } from "antd"
+import { GetUnits } from "@/app/service/api";
+import { Col, Divider, Form, Input, InputNumber, Modal, Row, Select } from "antd"
+import { log } from "console";
+import { useEffect, useState } from "react";
 const { TextArea } = Input;
 
 interface PropsValue {
     open : boolean
     setOpen : (value : boolean) => void
+}
+
+interface DataValue {
+  id : number,
+  name: string,
 }
 
 type FieldType = {
@@ -14,9 +22,22 @@ type FieldType = {
   unit?: string;
   description? : string;
 };
+
 const AddModal = (props : PropsValue) => {
    const {open, setOpen} = props
+   const [unit, setUnit] = useState<DataValue[]>([]);
    const [form] = Form.useForm();
+   
+   useEffect(() => {
+    const fetchUnit = async () => {
+      let res = await GetUnits();
+      console.log(res);
+      if(res && res.statusCode === 200){
+          setUnit(res.data);
+      }
+    }
+    fetchUnit();
+   },[])
 
    const handleCancel = () => {
     setOpen(false);
@@ -86,7 +107,12 @@ const AddModal = (props : PropsValue) => {
             name="unit"
             rules={[{ required: true, message: "Nhập đơn vị!" }]}
            >
-            <Input />
+            {/* [{ value: 'sample', label: <span>sample</span> }] */}
+            <Select options={unit.map(u => (
+              { value: u.id, 
+                label: <span>{u.name}</span> 
+              }
+            ))} />
           </Form.Item>
             </Col>
 
