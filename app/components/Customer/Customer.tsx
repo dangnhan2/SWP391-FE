@@ -10,10 +10,10 @@ import EditModal from "./EditModal";
 
 interface DataType {
   key: string;
-  name: string;
-  age: number;
+  id: string;
+  fullName: string;
+  phone: string;
   address: string;
-  tags: string[];
 }
 const Customer = () => {
   const [data, setData] = useState();
@@ -48,8 +48,8 @@ const Customer = () => {
 
                         <Popconfirm
                             placement="leftTop"
-                            title={"Xác nhận xóa book"}
-                            description={"Bạn có chắc chắn muốn xóa book này ?"}
+                            title={"Xác nhận xóa "}
+                            description={"Bạn có chắc chắn muốn xóa này ?"}
                            //  onConfirm={() => handleDeleteBook(record._id)}
                             okText="Xác nhận"
                             cancelText="Hủy"
@@ -88,7 +88,7 @@ const Customer = () => {
    return (
    <>
      <div>
-      <h1 className="font-bold text-3xl mb-5">Thực đơn</h1>
+      <h1 className="font-bold text-3xl mb-5">Khách hàng</h1>
       <Table<DataType> title={renderHeader} columns={columns} dataSource={data} />
    </div>
       <AddModal open={open} setOpen={setOpen}></AddModal>

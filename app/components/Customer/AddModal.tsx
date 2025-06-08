@@ -1,5 +1,5 @@
 "use client"
-import { Col, Divider, Form, Input, InputNumber, Modal, Row } from "antd"
+import { Col, Divider, Form, Input, InputNumber, Modal, Row, Select } from "antd";
 const { TextArea } = Input;
 
 interface PropsValue {
@@ -8,11 +8,12 @@ interface PropsValue {
 }
 
 type FieldType = {
-  name?: string;
-  quantity?: string;
-  price?: number;
-  unit?: string;
-  description? : string;
+  fullName?: string;
+  phone?: string;
+  email?: string;
+  address?: string;
+  gender?: string;
+  note?: string;
 };
 const AddModal = (props : PropsValue) => {
    const {open, setOpen} = props
@@ -30,7 +31,7 @@ const AddModal = (props : PropsValue) => {
    <div>
     <Modal
       width={600}
-      title="Thêm nguyên liệu mới"
+      title="Add New Customer"
       open={open}
       onOk={form.submit}
       onCancel={handleCancel}
@@ -51,8 +52,8 @@ const AddModal = (props : PropsValue) => {
           <Row gutter={[20,20]}>
              <Col span={12}>
                 <Form.Item<FieldType>
-                  label="Tên nguyên liệu"
-                  name="name"
+                  label="Full Name"
+                  name="fullName"
                   rules={[{ required: true, message: "Nhập tên!" }]}
               >
                   <Input />
@@ -61,9 +62,9 @@ const AddModal = (props : PropsValue) => {
              <Col span={12}>
                   <Form.Item<FieldType>
                    
-                   label="Số lượng"
-                   name="quantity"
-                    rules={[{ required: true, message: "Nhập số lượng!" }]}
+                   label="Phone Number"
+                   name="phone"
+                    rules={[{ required: true, message: "Nhập số điện thoại !" }]}
                   >
                     <InputNumber min={1} defaultValue={1} style={{ width: '100%' }}/>
                    </Form.Item>
@@ -73,28 +74,37 @@ const AddModal = (props : PropsValue) => {
           <Row gutter={[20,20]}>
             <Col span={12}>
                <Form.Item<FieldType>
-            label="Giá"
-            name="price"
-            rules={[{ required: true, message: "Nhập giá!" }]}
+            label="Email "
+            name="email"
+            rules={[{ required: true, message: "Nhập email !" }]}
           >
             <Input />
           </Form.Item>
             </Col>
             <Col span={12}>
             <Form.Item<FieldType>
-            label="Đơn vị"
-            name="unit"
-            rules={[{ required: true, message: "Nhập đơn vị!" }]}
+            label="Address "
+            name="address"
+            rules={[{ required: true, message: "Nhập địa chỉ !" }]}
            >
             <Input />
           </Form.Item>
             </Col>
+            <Col span={12}>
+                  <Form.Item<FieldType>
+                   label="Gender"
+                   name="gender"
+                   rules={[{ required: true, message: "Chọn giới tính " }]}
+                  >
+                    <Select options={[{ value: 'male', label: <span>Male</span> } , { value: 'female', label: <span>Female</span> }]} />
+                   </Form.Item>
+             </Col>  
+        </Row>
 
-          </Row>
           <Row>
 
               <Col span={24}>
-              <Form.Item<FieldType> label="Ghi Chú">
+              <Form.Item<FieldType> label="Note">
               
               <TextArea  onChange={onChange} rows={4}/>
               </Form.Item>
@@ -106,6 +116,6 @@ const AddModal = (props : PropsValue) => {
     </Modal>
    </div>)
 }
-export default AddModal
+export default AddModal;
 
           
