@@ -1,26 +1,26 @@
 "use client"
-import { Col, Divider, Form, Input, InputNumber, Modal, Row, Select } from "antd";
+import { Col, Divider, Form, Input, InputNumber, Modal, Row, Select, Upload } from "antd";
+import { UploadOutlined } from "@ant-design/icons";
 const { TextArea } = Input;
-
 interface PropsValue {
-    open : boolean
-    setOpen : (value : boolean) => void
+    openEditModal : boolean
+    setOpenEditModal : (value : boolean) => void
 }
 
 type FieldType = {
-  fullName?: string;
-  phone?: string;
-  email?: string;
-  address?: string;
-  gender?: string;
-  note?: string;
+  image?: any;
+  name?: string;
+  price?: number;
+  category?: string;
+  description?: string;
 };
-const AddModal = (props : PropsValue) => {
-   const {open, setOpen} = props
+
+const EditModal = (props : PropsValue) => {
+   const {openEditModal, setOpenEditModal} = props
    const [form] = Form.useForm();
 
    const handleCancel = () => {
-    setOpen(false);
+    setOpenEditModal(false);
   };
 
   const onChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
@@ -31,8 +31,8 @@ const AddModal = (props : PropsValue) => {
    <div>
     <Modal
       width={600}
-      title="Add New Customer"
-      open={open}
+      title="Edit New Dish"
+      open={openEditModal}
       onOk={form.submit}
       onCancel={handleCancel}
       okText="Tạo mới"
@@ -52,19 +52,21 @@ const AddModal = (props : PropsValue) => {
           <Row gutter={[20,20]}>
              <Col span={12}>
                 <Form.Item<FieldType>
-                  label="Full Name"
-                  name="fullName"
-                  rules={[{ required: true, message: "Nhập tên!" }]}
+                  label="Image"
+                  name="image"
+                  valuePropName="file"
               >
-                  <Input />
+                  <Upload beforeUpload={() => false} maxCount={1}>
+                <Input addonBefore="Choose file" readOnly value="No file choosen" />
+              </Upload>
                  </Form.Item>
              </Col>
              <Col span={12}>
                   <Form.Item<FieldType>
                    
-                   label="Phone Number"
-                   name="phone"
-                    rules={[{ required: true, message: "Nhập số điện thoại !" }]}
+                   label="Name"
+                   name="name"
+                    rules={[{ required: true, message: "Nhập tên!" }]}
                   >
                     <InputNumber min={1} defaultValue={1} style={{ width: '100%' }}/>
                    </Form.Item>
@@ -74,37 +76,27 @@ const AddModal = (props : PropsValue) => {
           <Row gutter={[20,20]}>
             <Col span={12}>
                <Form.Item<FieldType>
-            label="Email "
-            name="email"
-            rules={[{ required: true, message: "Nhập email !" }]}
+            label="Price"
+            name="price"
+            rules={[{ required: true, message: "Nhập giá!" }]}
           >
             <Input />
           </Form.Item>
             </Col>
             <Col span={12}>
             <Form.Item<FieldType>
-            label="Address "
-            name="address"
-            rules={[{ required: true, message: "Nhập địa chỉ !" }]}
+            label="Category"
+            name="category"
+            rules={[{ required: true, message: "Nhập loại!" }]}
            >
-            <Input />
+             <Select options={[{ value: 'Coffee', label: <span>Coffee</span> } , { value: 'Tea', label: <span>Tea</span> }]} />
           </Form.Item>
             </Col>
-            <Col span={12}>
-                  <Form.Item<FieldType>
-                   label="Gender"
-                   name="gender"
-                   rules={[{ required: true, message: "Chọn giới tính " }]}
-                  >
-                    <Select options={[{ value: 'male', label: <span>Male</span> } , { value: 'female', label: <span>Female</span> }]} />
-                   </Form.Item>
-             </Col>  
-        </Row>
 
+          </Row>
           <Row>
-
               <Col span={24}>
-              <Form.Item<FieldType> label="Note">
+              <Form.Item<FieldType> label="Description">
               
               <TextArea  onChange={onChange} rows={4}/>
               </Form.Item>
@@ -116,6 +108,4 @@ const AddModal = (props : PropsValue) => {
     </Modal>
    </div>)
 }
-export default AddModal;
-
-          
+export default EditModal;

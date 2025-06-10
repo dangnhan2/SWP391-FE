@@ -3,7 +3,7 @@ import { DeleteTwoTone, EditTwoTone, PlusOutlined } from "@ant-design/icons";
 import { Button, Popconfirm, Table } from "antd";
 import { TableProps } from "antd/lib";
 import { useState } from "react";
-import AddModal from "./AddModal";
+import AddModal from "./Addmodal";
 import EditModal from "./EditModal";
 // import Add from "./Add";
 // import AddIngrident from "./Add";
@@ -11,11 +11,12 @@ import EditModal from "./EditModal";
 interface DataType {
   key: string;
   id: string;
-  fullName: string;
-  phone: string;
-  address: string;
+  image: string;
+  dishName: string;
+  category: string;
+  price: number;
 }
-const Customer = () => {
+const Dish = () => {
   const [data, setData] = useState();
   const [open, setOpen] = useState<boolean>(false);
   const [openEditModal,setOpenEditModal] = useState<boolean>(false)
@@ -26,19 +27,25 @@ const Customer = () => {
     key: 'id',
   },
   {
-    title: 'FullName',
-    dataIndex: 'fullname',
-    key: 'name',
+    title: 'Image',
+    dataIndex: 'image',
+    key: 'image',
+    render: (img) => <img src={img} alt="dish" className="w-12 h-12 object-cover rounded" />,
   },
   {
-    title: 'PhoneNo',
-    dataIndex: 'phoneno',
-    key: 'phone',
+    title: 'Dish Name',
+    dataIndex: 'dishname',
+    key: 'dishname',
   },
    {
-    title: 'Address',
-    dataIndex: 'address',
-    key: 'address',
+    title: 'Category',
+    dataIndex: 'category',
+    key: 'category',
+  },
+  {
+    title: 'Price',
+    dataIndex: 'price',
+    key: 'price',
   },
   {
     title: 'Action',
@@ -88,7 +95,7 @@ const Customer = () => {
    return (
    <>
      <div>
-      <h1 className="font-bold text-3xl mb-5">Khách hàng</h1>
+      <h1 className="font-bold text-3xl mb-5">Món ăn</h1>
       <Table<DataType> title={renderHeader} columns={columns} dataSource={data} />
    </div>
       <AddModal open={open} setOpen={setOpen}></AddModal>
@@ -99,4 +106,4 @@ const Customer = () => {
   
 }
 
-export default Customer;
+export default Dish;
