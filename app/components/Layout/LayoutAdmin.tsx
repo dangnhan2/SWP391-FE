@@ -3,10 +3,12 @@ import { MenuFoldOutlined, MenuUnfoldOutlined } from "@ant-design/icons";
 import { Avatar, Button, Dropdown, Layout, Menu, Space, theme } from "antd";
 import Link from "next/link";
 import { ReactNode, useState } from "react";
-import { FaLeaf, FaMoneyBill } from "react-icons/fa";
+import { DiSmashingMagazine } from "react-icons/di";
+import { FaLeaf, FaMoneyBill, FaSatelliteDish } from "react-icons/fa";
 import { IoPeople } from "react-icons/io5";
 import { MdDashboard, MdMenuBook } from "react-icons/md";
 import { TbAdjustmentsUp } from "react-icons/tb";
+
 
 const { Header, Sider, Content } = Layout;
 
@@ -47,6 +49,11 @@ const LayoutAdmin = ({ children }: LayoutProps) => {
       key: "6",
       icon:<FaMoneyBill />,
       label: <Link href="/admin/bill">Hóa Đơn</Link>,
+    },
+    {
+      key: "7",
+      icon:<DiSmashingMagazine />,
+      label: <Link href="/admin/dish">Món Ăn</Link>,
     },
   ];
   
