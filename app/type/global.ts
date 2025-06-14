@@ -5,8 +5,8 @@ declare global {
     interface IBackendRes<T> {
         msg : string;
         statusCode: number;
-        total : number;
-        data? : T 
+        total? : number;
+        data? : T
     }
 
     interface ISupplier {
@@ -16,5 +16,18 @@ declare global {
         address: string,
         representative : string,
         email : string
+    }
+
+    interface IDish {
+        id : number,
+        name : string,
+        category: string,
+        price: number,
+        description: string,
+        imageUrl: string
+    }
+
+    interface IImage {
+         url : string
     }
 }

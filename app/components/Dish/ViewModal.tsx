@@ -1,5 +1,5 @@
 "use client"
-import { GetSupplierById } from "@/app/service/api";
+import { GetDishById } from "@/app/service/api";
 import { Descriptions, Divider, Modal } from "antd";
 import { DescriptionsProps } from "antd/lib";
 import { useEffect, useState } from "react";
@@ -12,21 +12,20 @@ interface PropsValue {
 
 const ViewModal = (props : PropsValue) => {
     const {openView, setOpenView, id} = props;
-    const [data, setData] = useState<ISupplier>();
+    const [data, setData] = useState<IDish>();
 
     useEffect(() => {
         const fetch = async () => {
-            let res = await GetSupplierById(id);
-
-            if(res && res.statusCode === 200){
-                setData(res.data);
-            }
+           let res = await GetDishById(id);
+           if(res && res.statusCode === 200){
+            setData(res.data);
+           }
         }
         fetch();
-        
     },[id])
 
-  const items: DescriptionsProps['items'] = [
+
+    const items: DescriptionsProps['items'] = [
   {
     key: '1',
     label: 'Tên',
@@ -34,23 +33,29 @@ const ViewModal = (props : PropsValue) => {
   },
   {
     key: '2',
-    label: 'SĐT',
-    children: <p>{data?.phoneNo}</p>,
+    label: 'Hình ảnh',
+     children: (
+      <img
+        src={data?.imageUrl}
+        alt="Hình ảnh sản phẩm"
+        style={{ maxWidth: '100%', maxHeight: 100, objectFit: 'contain' }}
+      />
+     )
   },
   {
     key: '3',
-    label: 'Địa chỉ',
-    children: <p>{data?.address}</p>,
+    label: 'Danh mục',
+    children: <p>{data?.category}</p>,
   },
   {
     key: '4',
-    label: 'Email',
-    children: <p>{data?.email}</p>,
+    label: 'Giá',
+    children: <p>{data?.price}</p>,
   },
   {
     key: '5',
-    label: 'Người đại diện',
-    children: <p>{data?.representative}</p>,
+    label: 'Ghi chú',
+    children: <p>{data?.description}</p>,
   },
 ];
    const handleCancel = () => {
@@ -68,8 +73,9 @@ const ViewModal = (props : PropsValue) => {
         footer={false}
       > 
       <Divider></Divider>
-        <Descriptions items={items} bordered column={{ xxl: 1, xl: 1, lg: 1, md: 1, sm: 1, xs: 1 }}/>
+        <Descriptions items={items} bordered  column={{ xxl: 1, xl: 1, lg: 1, md: 1, sm: 1, xs: 1 }}/>
       </Modal>
     )
+
 }
 export default ViewModal;

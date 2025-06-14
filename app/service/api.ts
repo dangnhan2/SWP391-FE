@@ -35,3 +35,33 @@ export const DeleteSupplier = (id : number) => {
 export const GetUnits = () => {
     return axios.get(`/api/Unit/getAll`);
 }
+
+export const GetDishes = (query : string) => {
+    return axios.get<IBackendRes<IDish[]>>(`/api/Dish/getAll${query}`);
+}
+
+export const GetDishById = (id : number) => {
+    return axios.get<IBackendRes<IDish>>(`/api/Dish/getById/${id}`);
+}
+
+export const DeleteDish = (id : number) => {
+    return axios.delete(`/api/Dish/deleteDish/${id}`)
+}
+
+export const AddDish = (name : string, category: string, price: number, description: string, imageUrl: string) => {
+    return axios.post<IBackendRes<IDish>>(`/api/Dish/createDish`, {name, category, price, description, imageUrl})
+}
+
+export const UpdateDish = (id : number, name : string, category: string, price: number, description: string, imageUrl: string) => {
+    return axios.put<IBackendRes<IDish>>(`/api/Dish/updateDish/${id}`,  {name, category, price, description, imageUrl})
+}
+
+export const UploadImage = (file: File) => {
+  const formData = new FormData();
+  formData.append("file", file);
+  return axios.post("/api/File/image", formData); // Your controller should map to this
+};
+
+export const DeleteImage = (url : string) => {
+    return axios.delete(`/api/File/image?url=${url}`)
+}
