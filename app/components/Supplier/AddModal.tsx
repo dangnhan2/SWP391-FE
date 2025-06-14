@@ -1,6 +1,6 @@
 "use client"
 import { AddSupplier } from "@/app/service/api";
-import { Col, Divider, Form, Input, message, Modal, Row,notification } from "antd"
+import { Col, Divider, Form, Input, message, Modal, Row,notification, NotificationArgsProps } from "antd"
 import { FormProps } from "antd/lib";
 const { TextArea } = Input;
 
@@ -22,8 +22,8 @@ type FieldType = {
 const AddModal = (props : PropsValue) => {
    const {open, setOpen, fetchSupplier} = props
    const [form] = Form.useForm();
-  const [messageApi, messageContext] = message.useMessage();
-  const [notificationApi, notificationContext] = notification.useNotification();
+   const [messageApi, messageContext] = message.useMessage();
+   const [notificationApi, notificationContext] = notification.useNotification();
 
    const openNotification = (type: 'success' | 'error', message: string, description: string, placement: NotificationArgsProps['placement'] = 'topRight') => {
     notificationApi[type]({

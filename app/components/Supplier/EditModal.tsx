@@ -1,6 +1,6 @@
 "use client"
 import { UpdateSupplier } from "@/app/service/api";
-import { Col, Divider, Form, Input, message, Modal, notification, Row } from "antd";
+import { Col, Divider, Form, Input, message, Modal, notification, NotificationArgsProps, Row } from "antd";
 import { FormProps } from "antd/lib";
 import { useEffect } from "react";
 
